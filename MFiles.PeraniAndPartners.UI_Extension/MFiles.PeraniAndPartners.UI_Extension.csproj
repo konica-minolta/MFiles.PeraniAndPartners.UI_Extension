@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7D78394C-43D5-45BD-9318-1AD6668969A0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MFiles.PeraniAndPartners.UI_Extension</RootNamespace>
+    <AssemblyName>MFiles.PeraniAndPartners.UI_Extension</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="app\appdef.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="app\console-shellui.js" />
+    <Content Include="app\Content\style.css" />
+    <Content Include="app\shellui.js" />
+    <Content Include="app\my-dashboard\my-dashboard.html" />
+    <Content Include="app\my-dashboard\console-dashboard.js" />
+    <Content Include="app\my-dashboard\my-dashboard.js" />
+    <Content Include="app\Content\bootstrap-grid.css" />
+    <Content Include="app\Content\bootstrap-grid.min.css" />
+    <Content Include="app\Content\bootstrap-reboot.css" />
+    <Content Include="app\Content\bootstrap-reboot.min.css" />
+    <Content Include="app\Content\bootstrap.css" />
+    <Content Include="app\Content\bootstrap.min.css" />
+    <Content Include="app\Scripts\bootstrap.bundle.js" />
+    <Content Include="app\Scripts\bootstrap.bundle.min.js" />
+    <Content Include="app\Scripts\bootstrap.js" />
+    <Content Include="app\Scripts\bootstrap.min.js" />
+    <Content Include="app\Scripts\esm\popper-utils.js" />
+    <Content Include="app\Scripts\esm\popper-utils.min.js" />
+    <Content Include="app\Scripts\esm\popper.js" />
+    <Content Include="app\Scripts\esm\popper.min.js" />
+    <Content Include="app\Scripts\jquery-3.0.0-vsdoc.js" />
+    <Content Include="app\Scripts\jquery-3.0.0.js" />
+    <Content Include="app\Scripts\jquery-3.0.0.min.js" />
+    <Content Include="app\Scripts\jquery-3.0.0.slim.js" />
+    <Content Include="app\Scripts\jquery-3.0.0.slim.min.js" />
+    <Content Include="app\Scripts\popper-utils.js" />
+    <Content Include="app\Scripts\popper-utils.min.js" />
+    <Content Include="app\Scripts\popper.js" />
+    <Content Include="app\Scripts\popper.min.js" />
+    <Content Include="app\Scripts\src\index.js" />
+    <Content Include="app\Scripts\src\methods\defaults.js" />
+    <Content Include="app\Scripts\src\methods\destroy.js" />
+    <Content Include="app\Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="app\Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="app\Scripts\src\methods\placements.js" />
+    <Content Include="app\Scripts\src\methods\update.js" />
+    <Content Include="app\Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="app\Scripts\src\modifiers\arrow.js" />
+    <Content Include="app\Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="app\Scripts\src\modifiers\flip.js" />
+    <Content Include="app\Scripts\src\modifiers\hide.js" />
+    <Content Include="app\Scripts\src\modifiers\index.js" />
+    <Content Include="app\Scripts\src\modifiers\inner.js" />
+    <Content Include="app\Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="app\Scripts\src\modifiers\offset.js" />
+    <Content Include="app\Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="app\Scripts\src\modifiers\shift.js" />
+    <Content Include="app\Scripts\src\utils\clockwise.js" />
+    <Content Include="app\Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="app\Scripts\src\utils\debounce.js" />
+    <Content Include="app\Scripts\src\utils\find.js" />
+    <Content Include="app\Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="app\Scripts\src\utils\findIndex.js" />
+    <Content Include="app\Scripts\src\utils\getBordersSize.js" />
+    <Content Include="app\Scripts\src\utils\getBoundaries.js" />
+    <Content Include="app\Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="app\Scripts\src\utils\getClientRect.js" />
+    <Content Include="app\Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="app\Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="app\Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="app\Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="app\Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="app\Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="app\Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="app\Scripts\src\utils\getParentNode.js" />
+    <Content Include="app\Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="app\Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="app\Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="app\Scripts\src\utils\getRoot.js" />
+    <Content Include="app\Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="app\Scripts\src\utils\getScroll.js" />
+    <Content Include="app\Scripts\src\utils\getScrollParent.js" />
+    <Content Include="app\Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="app\Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="app\Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="app\Scripts\src\utils\getWindow.js" />
+    <Content Include="app\Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="app\Scripts\src\utils\includeScroll.js" />
+    <Content Include="app\Scripts\src\utils\index.js" />
+    <Content Include="app\Scripts\src\utils\isBrowser.js" />
+    <Content Include="app\Scripts\src\utils\isFixed.js" />
+    <Content Include="app\Scripts\src\utils\isFunction.js" />
+    <Content Include="app\Scripts\src\utils\isIE.js" />
+    <Content Include="app\Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="app\Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="app\Scripts\src\utils\isNumeric.js" />
+    <Content Include="app\Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="app\Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="app\Scripts\src\utils\runModifiers.js" />
+    <Content Include="app\Scripts\src\utils\setAttributes.js" />
+    <Content Include="app\Scripts\src\utils\setStyles.js" />
+    <Content Include="app\Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="app\Scripts\umd\popper-utils.js" />
+    <Content Include="app\Scripts\umd\popper-utils.min.js" />
+    <Content Include="app\Scripts\umd\popper.js" />
+    <Content Include="app\Scripts\umd\popper.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app\Content\bootstrap-grid.css.map" />
+    <None Include="app\Content\bootstrap-grid.min.css.map" />
+    <None Include="app\Content\bootstrap-reboot.css.map" />
+    <None Include="app\Content\bootstrap-reboot.min.css.map" />
+    <None Include="app\Content\bootstrap.css.map" />
+    <None Include="app\Content\bootstrap.min.css.map" />
+    <None Include="packages.config" />
+    <None Include="app\Scripts\bootstrap.bundle.js.map" />
+    <None Include="app\Scripts\bootstrap.bundle.min.js.map" />
+    <None Include="app\Scripts\bootstrap.js.map" />
+    <None Include="app\Scripts\bootstrap.min.js.map" />
+    <None Include="app\Scripts\esm\popper-utils.js.map" />
+    <None Include="app\Scripts\esm\popper-utils.min.js.map" />
+    <None Include="app\Scripts\esm\popper.js.map" />
+    <None Include="app\Scripts\esm\popper.min.js.map" />
+    <None Include="app\Scripts\index.js.flow" />
+    <None Include="app\Scripts\jquery-3.0.0.min.map" />
+    <None Include="app\Scripts\jquery-3.0.0.slim.min.map" />
+    <None Include="app\Scripts\popper-utils.js.map" />
+    <None Include="app\Scripts\popper-utils.min.js.map" />
+    <None Include="app\Scripts\popper.js.map" />
+    <None Include="app\Scripts\popper.min.js.map" />
+    <None Include="app\Scripts\README.md" />
+    <None Include="app\Scripts\umd\popper-utils.js.map" />
+    <None Include="app\Scripts\umd\popper-utils.min.js.map" />
+    <None Include="app\Scripts\umd\popper.js.flow" />
+    <None Include="app\Scripts\umd\popper.js.map" />
+    <None Include="app\Scripts\umd\popper.min.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app\Scripts\index.d.ts" />
+  </ItemGroup>
+  <Target Name="Clean">
+    <RemoveDir Directories="out" />
+  </Target>
+  <Target Name="Build">
+    <RemoveDir Directories="bin;obj" />
+    <CreateItem Include="app\**">
+      <Output ItemName="ApplicationFiles" TaskParameter="Include" />
+    </CreateItem>
+    <Zip ZipFileName="out\$(AssemblyName).mfappx" WorkingDirectory="$(MSBuildProjectDirectory)\app" Files="@(ApplicationFiles)" />
+    <!-- Modify and uncomment the following line to enable development time installation to sysapps folder.
+         Visual Studio needs to run in Administrative mode. -->
+    <!-- <Unzip ZipFileName="out\$(AssemblyName).mfappx" TargetDirectory="C:\Program Files\M-Files\<Version>\Client\Apps\<VaultGuid>\sysapps\$(AssemblyName)" /> -->
+  </Target>
+  <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets'))" />
+  </Target>
+  <Import Project="..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets" Condition="Exists('..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

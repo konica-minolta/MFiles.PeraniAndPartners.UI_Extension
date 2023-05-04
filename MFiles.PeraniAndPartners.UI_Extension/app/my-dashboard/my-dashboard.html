@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <!--<script src="console-dashboard.js"></script>-->
+    <script src="../Scripts/jquery-3.0.0.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <script src="my-dashboard.js"></script>
+    <link rel="stylesheet" href="../Content/bootstrap.css">
+    <link rel="stylesheet" href="../Content/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-perani">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          
+            <div class="navbar-nav navbar-nav-perani">
+                
+                <div class="form-group form-group-perani">
+                    <label for="tipoRicerca">Tipo Ricerca</label>
+                    <select class="form-control" id="tipoRicerca">
+                        <option>Dominio</option>
+                    </select>
+                </div>
+                <div class="form-group form-group-perani">
+                    <label for="nomeDominio">Nome Dominio</label>
+                    <input type="text" class="form-control" id="nomeDominio">
+                </div>
+                <div class="form-group form-group-perani">
+                    <label for="extDominio">Estensione Dominio</label>
+                    <input type="text" class="form-control" id="extDominio">
+                </div>
+                <div class="form-check form-check-perani">
+                    <input class="form-check-input" type="checkbox" value="" id="dominioEsatto">
+                    <label class="form-check-label" for="dominioEsatto">
+                        dominio esatto
+                    </label>
+                </div>
+                <div class="form-group form-group-perani">
+                    <label for="tipoRicerca">Status</label>
+                    <select class="form-control" id="status">
+                        <option>Qualsiasi</option>
+                    </select>
+                </div>
+                <div class="form-group form-group-perani">
+                    <label for="scadenzaDal">In scadenza Dal</label>
+                    <input type="date" class="form-control" id="scadenzaDal">
+                </div>
+                <div class="form-group form-group-perani">
+                    <label for="scadenzaAl">Al</label>
+                    <input type="date" class="form-control" id="scadenzaAl">
+                </div>
+                <div class="form-button-perani">
+                    <button id="searchButton" type="button" class="btn btn-primary btn-sm">Cerca</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container perani-container">
+
+        <div class="row">
+            <table id="IntranetTable" class="table">
+                <thead>
+                    <tr>
+                        <th class="header" scope="col">Nome Dominio</th>
+                        <th class="header" scope="col">Data Registrazione</th>
+                        <th class="header" scope="col">Data Scadenza</th>
+                        <th class="header" scope="col">Provider</th>
+                        <th class="header" scope="col">Registrar</th>
+                        <th class="header" scope="col">Cliente</th>
+                        <th class="header" scope="col">Owner</th>
+                        <th class="header" scope="col">Note Ex Registrar</th>
+                        <th class="header" scope="col">Note Generali</th>
+                </thead>
+                <tbody>
+                </tbody>
+
+
+            </table>
+        </div>
+    </div>
+    <footer class="perani-footer">
+        <div class="container ">
+            <!--Grid row-->
+            <div class="row mt-4">
+                <!--Grid column-->
+                <div class="col-lg-2 col-md-3 mb-4 mb-md-0">
+
+                    <div class="form-group form-group-perani">
+                        <label for="itemPerPagina">Record per Pagina</label>
+                        <select class="form-control" id="itemPerPagina">
+                            <option>50</option>
+                            <option>100</option>
+                            <option>150</option>
+                            <option>200</option>
+                            <option>250</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 mb-8 mb-md-0 perani-nav">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination" id="pagination-perani"></ul>
+                    </nav>
+                </div>
+                <div class="col-lg-4 col-md-3 mb-4 mb-md-0 form-buttongroup-perani">
+                    <div class="form-button-perani-footer">
+                        <button type="button" class="btn btn-success btn-sm">Esporta Pagina</button>
+                    </div>
+                    <div class="form-button-perani-footer">
+                        <button type="button" class="btn btn-success btn-sm">Esporta Tutti</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
