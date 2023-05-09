@@ -29,6 +29,7 @@
     </Content>
     <Content Include="app\console-shellui.js" />
     <Content Include="app\Content\style.css" />
+    <Content Include="app\my-dashboard\my-dashboard - Copy.js" />
     <Content Include="app\shellui.js" />
     <Content Include="app\my-dashboard\my-dashboard.html" />
     <Content Include="app\my-dashboard\console-dashboard.js" />

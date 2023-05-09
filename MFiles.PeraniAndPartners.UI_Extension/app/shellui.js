@@ -16,8 +16,11 @@ function OnNewNormalShellFrame(shellFrame) {
     var myTab;
     shellFrame.Events.Register(MFiles.Event.Started, OnStarted);
     function OnStarted() {
+
+        var accountName = shellFrame.ShellUI.Vault.SessionInfo.AccountName;
+       
         myTab = shellFrame.RightPane.AddTab("my-tab", "Intranet", "_last");
-        myTab.ShowDashboard("intranet-dashboard", {});
+        myTab.ShowDashboard("intranet-dashboard", { AccountName: accountName });
 
         // Show the tab.
         myTab.visible = true;

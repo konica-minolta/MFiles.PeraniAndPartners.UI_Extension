@@ -55,6 +55,14 @@ namespace MFiles.PeraniAndPartners.Backend.Models
                 entity.Property(e => e.NoteExRegistrar)
                     .HasColumnType("ntext")
                     .HasColumnName("NoteExRegistrar");
+
+                entity.Property(e => e.NomeDominioCompleto)
+                   .HasMaxLength(100)
+                   .HasColumnName("NomeDominioCompleto");
+
+                entity.Property(e => e.Estensione)
+                  .HasMaxLength(100)
+                  .HasColumnName("Estensione");
             });
 
             OnModelCreatingPartial(modelBuilder);

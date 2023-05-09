@@ -65,3 +65,10 @@ table {
 	text-decoration:underline;
 }
 
+.container {
+padding-bottom:30px;
+}
+
+.close {
+	margin-top: -5px;
+}

@@ -20,5 +20,9 @@
 
         public string? NoteGenerali { get; set; }
 
+        public string? NomeDominioCompleto { get; set; }
+
+        public string? Estensione { get; set; }
+
     }
 }

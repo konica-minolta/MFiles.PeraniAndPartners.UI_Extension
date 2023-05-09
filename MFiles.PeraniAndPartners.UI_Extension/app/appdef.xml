@@ -22,6 +22,7 @@
 	<dashboards>
 		<dashboard id="intranet-dashboard">
 			<content>my-dashboard/my-dashboard.html</content>
+			<trusted-content>http://localhost:5250</trusted-content>
 			<allow-selection>true</allow-selection>
 		</dashboard>
 	</dashboards>

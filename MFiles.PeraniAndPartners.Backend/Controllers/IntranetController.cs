@@ -22,14 +22,30 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
         // GET: Intranet
         [EnableCors("_myAllowSpecificOrigins")] // Required for this path.
         [HttpGet]
-        public async Task<IActionResult> Get(int currentPage, int pageSize, [FromQuery] string dominio="null")
+        public async Task<IActionResult> Get(int currentPage, int pageSize, string dominio="null",string estensione ="null", bool ricercaEsatta = false, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null)
         {
 
             var domains = from s in _intranetPeraniContext.vw_domainnames
                           select s;
             if (dominio != "null")
             {
-                domains = domains.Where(s => s.NomeDominio ==dominio);
+                if (ricercaEsatta)
+                {
+                    domains = domains.Where(s => s.NomeDominio == dominio);
+                }
+                else
+                {
+                    domains = domains.Where(s => s.NomeDominio.Contains(dominio));
+                }  
+            }
+            if (estensione != "null")
+            {
+                domains = domains.Where(s => s.Estensione == estensione);
+            }
+
+            if (scadenzaDal!=null && scadenzaAl!=null)
+            {
+                domains = domains.Where(s => s.DataScadenza >= scadenzaDal && s.DataScadenza<=scadenzaAl);
             }
             domains = domains.OrderBy(s => s.NomeDominio);
 

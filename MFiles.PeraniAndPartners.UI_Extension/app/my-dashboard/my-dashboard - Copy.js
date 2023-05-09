@@ -1,49 +1,42 @@
-function OnNewDashboard(dashboard) {
+// Entry point of the dashboard.
+//function OnNewDashboard(dashboard) {
 
-    
- 
-    // Parent is a shell pane container (tab), when dashboard is shown in right pane.
-    var tab = dashboard.Parent;
+//    // Parent is a shell pane container (tab), when dashboard is shown in right pane.
+//    var tab = dashboard.Parent;
 
-    // Initialize console.
-    //console.initialize(tab.ShellFrame.ShellUI, "myDashboardName");
+//    // Initialize console.
+//    console.initialize(tab.ShellFrame.ShellUI, "myDashboardName");
 
-    // Some things are ready only after the dashboard has started.
-    dashboard.Events.Register(MFiles.Event.Started, OnStarted);
+//    // Some things are ready only after the dashboard has started.
+//    dashboard.Events.Register(MFiles.Event.Started, OnStarted);
+//    function OnStarted() {
+//        alert("Hello World");
+//    }
+//}
+$(document).ready(function () {
 
-    function OnStarted() {
 
-        var accountName = dashboard.CustomData.AccountName;
-     
-        //Load Dati
+    //Load Dati
+    GetData(1, 0);
+
+    //Modifica Numero Pagine
+    $("#itemPerPagina").on("change", function () {
         GetData(1, 0);
+    });
 
-        //Modifica Numero Pagine
-        $("#itemPerPagina").on("change", function () {
-            GetData(1, 0);
-        });
-
-        //Click bottone ricerca
-        //Modifica Numero Pagine
-        $("#searchButton").on("click", function () {
-            GetData(1, 0);
-        });
-
-        //EsportaExcel Pagina
-        $("#EsportaPagina").on("click", function () {
-            var currentPage = $("li.current").text();
-            window.location = "http://localhost:5250/api/IntranetDataPaginated?currentPage=" + currentPage + "&pageSize=" + $("#itemPerPagina").val() + "&dominio=" + (($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null") + "&estensione=" + (($("#extDominio").val() != "") ? $("#extDominio").val() : "null") + "&ricercaEsatta=" + (($("#dominioEsatto").is(':checked')) ? true : false) + (($("#scadenzaDal").val() != "") ? ("&scadenzaDal=" + $("#scadenzaDal").val()) : "") + (($("#scadenzaAl").val() != "") ? ("&scadenzaAl=" + $("#scadenzaAl").val()) : "");
-        });
-
-        //EsportaExcel Tutti
-        $("#EsportaTutti").on("click", function () {
-            window.location = "http://localhost:5250/api/IntranetDataAll?accountName=admin&dominio=" + (($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null") + "&estensione=" + (($("#extDominio").val() != "") ? $("#extDominio").val() : "null") + "&ricercaEsatta=" + (($("#dominioEsatto").is(':checked')) ? true : false) + (($("#scadenzaDal").val() != "") ? ("&scadenzaDal=" + $("#scadenzaDal").val()) : "") + (($("#scadenzaAl").val() != "") ? ("&scadenzaAl=" + $("#scadenzaAl").val()) : "");
-        });
-
-       
-    }
-}
-
+    //Click bottone ricerca
+    //Modifica Numero Pagine
+    $("#searchButton").on("click", function () {
+        GetData(1, 0);
+    });
+   
+    //EsportaExcel
+    $("#EsportaPagina").on("click", function () {
+        var currentPage = $("li.current").text();
+        window.location = "http://localhost:5250/api/IntranetExporter?currentPage="+currentPage+"&pageSize=" + $("#itemPerPagina").val() + "&dominio=" + (($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null") + "&estensione=" + (($("#extDominio").val() != "") ? $("#extDominio").val() : "null");
+    });
+    
+});
 function GetRecordNumber(currentPage, startPaging) {
     $.ajax({
         url: "http://localhost:5250/api/IntranetCounter",

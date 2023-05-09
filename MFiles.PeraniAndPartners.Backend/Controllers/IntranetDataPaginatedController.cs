@@ -1,20 +1,20 @@
 ﻿using MFiles.PeraniAndPartners.Backend.Models;
+using MFiles.PeraniAndPartners.Backend.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using System.IO;
 
 namespace MFiles.PeraniAndPartners.Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class IntranetCounterController : ControllerBase
+    public class IntranetDataPaginatedController : ControllerBase
     {
-
         private IntranetPeraniContext _intranetPeraniContext;
 
-        public IntranetCounterController(IntranetPeraniContext intranetPeraniContext)
+        public IntranetDataPaginatedController(IntranetPeraniContext intranetPeraniContext)
         {
             _intranetPeraniContext = intranetPeraniContext;
         }
@@ -22,9 +22,8 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
         // GET: Intranet
         [EnableCors("_myAllowSpecificOrigins")] // Required for this path.
         [HttpGet]
-        public async Task<IActionResult> Get(int pageSize, string dominio="null", string estensione = "null",bool ricercaEsatta=false, DateTime? scadenza = null, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null)
+        public async Task<FileResult> Get(int currentPage, int pageSize, string dominio = "null", string estensione = "null", bool ricercaEsatta = false, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null)
         {
-
             var domains = from s in _intranetPeraniContext.vw_domainnames
                           select s;
             if (dominio != "null")
@@ -42,15 +41,27 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
             {
                 domains = domains.Where(s => s.Estensione == estensione);
             }
+
             if (scadenzaDal != null && scadenzaAl != null)
             {
                 domains = domains.Where(s => s.DataScadenza >= scadenzaDal && s.DataScadenza <= scadenzaAl);
             }
+            domains = domains.OrderBy(s => s.NomeDominio);
 
-            return Ok((int)Math.Ceiling(domains.Count()/(decimal)pageSize));
+            List<Domain> domainsToExport = domains.Skip((currentPage-1) * pageSize).Take(pageSize).ToList<Domain>();
+            //List<Domain> domainsToExport = domains.ToList<Domain>();
+            var bytes = ExcelService.ListToExcel<Domain>(domainsToExport);
 
+            const string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            HttpContext.Response.ContentType = contentType;
+            HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
+
+            var fileContentResult = new FileContentResult(bytes, contentType)
+            {
+                FileDownloadName = "Intranet_Export.xlsx"
+            };
+
+            return fileContentResult;
         }
-
-      
     }
 }
