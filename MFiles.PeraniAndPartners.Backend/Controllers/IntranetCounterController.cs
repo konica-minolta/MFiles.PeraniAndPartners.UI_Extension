@@ -22,9 +22,10 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
         // GET: Intranet
         [EnableCors("_myAllowSpecificOrigins")] // Required for this path.
         [HttpGet]
-        public async Task<IActionResult> Get(int pageSize, string dominio="null", string estensione = "null",bool ricercaEsatta=false, DateTime? scadenza = null, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null)
+        public async Task<IActionResult> Get(int pageSize, string dominio="null", string estensione = "null",bool ricercaEsatta=false, DateTime? scadenza = null, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null, string stato = "QUALSIASI")
         {
 
+           
             var domains = from s in _intranetPeraniContext.vw_domainnames
                           select s;
             if (dominio != "null")
@@ -44,10 +45,19 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
             }
             if (scadenzaDal != null && scadenzaAl != null)
             {
-                domains = domains.Where(s => s.DataScadenza >= scadenzaDal && s.DataScadenza <= scadenzaAl);
+               scadenzaDal.Value.ToLocalTime();
+               domains = domains.Where(s => s.DataScadenza >= scadenzaDal && s.DataScadenza <= scadenzaAl);
             }
 
-            return Ok((int)Math.Ceiling(domains.Count()/(decimal)pageSize));
+            if (stato!="QUALSIASI")
+            {
+                domains = domains.Where(s => s.Stato == stato);
+            }
+            int total;
+           
+            total = domains.Count();
+            
+            return Ok(total);
 
         }
 

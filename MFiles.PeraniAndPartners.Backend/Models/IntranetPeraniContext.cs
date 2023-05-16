@@ -30,39 +30,27 @@ namespace MFiles.PeraniAndPartners.Backend.Models
 
                 entity.Property(e => e.Cliente).HasMaxLength(100);
 
+                entity.Property(e => e.DataRegistrazione).HasColumnType("datetime");
+
+                entity.Property(e => e.DataScadenza).HasColumnType("datetime");
+
+                entity.Property(e => e.Estensione).HasMaxLength(10);
+
+                entity.Property(e => e.NomeDominio).HasMaxLength(100);
+
+                entity.Property(e => e.NomeDominioCompleto).HasMaxLength(100);
+
+                entity.Property(e => e.NoteExRegistrar).HasColumnType("ntext");
+
+                entity.Property(e => e.NoteGenerali).HasColumnType("ntext");
+
                 entity.Property(e => e.Owner).HasMaxLength(100);
 
                 entity.Property(e => e.Provider).HasMaxLength(100);
 
                 entity.Property(e => e.Registrar).HasMaxLength(100);
 
-                entity.Property(e => e.DataRegistrazione)
-                    .HasColumnType("datetime")
-                    .HasColumnName("DataRegistrazione");
-
-                entity.Property(e => e.DataScadenza)
-                    .HasColumnType("datetime")
-                    .HasColumnName("DataScadenza");
-
-                entity.Property(e => e.NoteGenerali)
-                    .HasColumnType("ntext")
-                    .HasColumnName("NoteGenerali");
-
-                entity.Property(e => e.NomeDominio)
-                    .HasMaxLength(100)
-                    .HasColumnName("NomeDominio");
-
-                entity.Property(e => e.NoteExRegistrar)
-                    .HasColumnType("ntext")
-                    .HasColumnName("NoteExRegistrar");
-
-                entity.Property(e => e.NomeDominioCompleto)
-                   .HasMaxLength(100)
-                   .HasColumnName("NomeDominioCompleto");
-
-                entity.Property(e => e.Estensione)
-                  .HasMaxLength(100)
-                  .HasColumnName("Estensione");
+                entity.Property(e => e.Stato).HasMaxLength(100);
             });
 
             OnModelCreatingPartial(modelBuilder);

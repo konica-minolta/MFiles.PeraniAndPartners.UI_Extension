@@ -3,12 +3,16 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <!--<script src="console-dashboard.js"></script>-->
+    <script src="console-dashboard.js"></script>
     <script src="../Scripts/jquery-3.0.0.js"></script>
     <script src="../Scripts/bootstrap.js"></script>
+    <script src="../Scripts/bootstrap-datepicker.js"></script>
     <script src="my-dashboard.js"></script>
+    <!--<script src="my-dashboardStandAlone.js"></script>-->
     <link rel="stylesheet" href="../Content/bootstrap.css">
+    <link rel="stylesheet" href="../Content/bootstrap-datepicker.standalone.css">
     <link rel="stylesheet" href="../Content/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
   
@@ -44,19 +48,43 @@
                 <div class="form-group form-group-perani">
                     <label for="tipoRicerca">Status</label>
                     <select class="form-control" id="status">
-                        <option>Qualsiasi</option>
+                        <option>QUALSIASI</option>
+                        <option>ABBANDONATO</option>
+                        <option>ARBITRATO</option>
+                        <option>ATTIVO</option>
+                        <option>CANCELLATO</option>
+                        <option>DA FATTURARE</option>
+                        <option>IN ATTIVAZIONE</option>
+                        <option>NON IN NS GESTIONE</option>
+                        <option>NON RINNOVATO</option>
+                        <option>PRESA IN AMM</option>
+                        <option>SORVEGLIANZA</option>
                     </select>
                 </div>
                 <div class="form-group form-group-perani">
                     <label for="scadenzaDal">In scadenza Dal</label>
-                    <input type="date" class="form-control" id="scadenzaDal">
+                    <div class="input-group date" data-provide="datepicker">
+                        <input type="text" class="datepicker" data-date-format="dd/mm/yyyy" id="scadenzaDal">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group form-group-perani">
+                <div class="form-group form-group-perani" style="position:relative">
                     <label for="scadenzaAl">Al</label>
-                    <input type="date" class="form-control" id="scadenzaAl">
+                    <div class="input-group date" data-provide="datepicker">
+                        <input type="text" class="datepicker" data-date-format="dd/mm/yyyy" id="scadenzaAl">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-button-perani">
+                <div class="form-group form-button-perani">
                     <button id="searchButton" type="button" class="btn btn-primary btn-sm">Cerca</button>
+                  
+                </div>
+                <div class="form-group form-button-perani">
+                    <button id="ClearButton" type="button" class="btn btn-dark btn-sm">Pulisci</button>
                 </div>
             </div>
         </div>
@@ -67,16 +95,17 @@
             <table id="IntranetTable" class="table table-sm table-responsive">
                 <thead>
                     <tr>
-                        <th class="header" scope="col">Nome Dominio</th>
-                        <th class="header" scope="col">Data Registrazione</th>
-                        <th class="header" scope="col">Data Scadenza</th>
+                        <th id="sortDominio"class="header" scope="col">Nome Dominio <i class="fas fa-sort-down"></i> <i class="fas fa-sort-up"></i></th>
+                        <th id="sortDataRegistrazione" class="header" scope="col">Registrazione <i class="fas fa-sort-down"></i><i class="fas fa-sort-up"></i></th>
+                        <th id="sortDataScadenza"class="header" scope="col">Scadenza <i class="fas fa-sort-down"></i><i class="fas fa-sort-up"></i></th>
                         <th class="header" scope="col">Provider</th>
                         <th class="header" scope="col">Registrar</th>
                         <th class="header" scope="col">Cliente</th>
                         <th class="header" scope="col">Owner</th>
+                        <th class="header" scope="col">Stato</th>
                         <th class="header" scope="col">Note Ex Registrar</th>
                         <th class="header" scope="col">Note Generali</th>
-                </thead>
+</thead>
                 <tbody>
                 </tbody>
 
@@ -101,6 +130,8 @@
                             <option>250</option>
                         </select>
                     </div>
+                    <b>Totale record <span id="recordsCounter"></span></b>
+                    <span id="recordsOrderType">1</span>
                 </div>
 
                 <div class="col-lg-6 col-md-6 mb-8 mb-md-0 perani-nav">

@@ -24,6 +24,8 @@ namespace MFiles.PeraniAndPartners.Backend.Services
                 if (query.Count() > 0)
                 {
                     ws.Cells["A2"].LoadFromCollection(query);
+                    ws.Column(3).Style.Numberformat.Format = "dd/mm/yyyy";
+                    ws.Column(4).Style.Numberformat.Format = "dd/mm/yyyy";
                 }
                 return pck.GetAsByteArray();
 
@@ -48,6 +50,8 @@ namespace MFiles.PeraniAndPartners.Backend.Services
                 if (query.Count() > 0)
                 {
                     ws.Cells["A2"].LoadFromCollection(query);
+                    ws.Column(3).Style.Numberformat.Format = "dd/mm/yyyy";
+                    ws.Column(4).Style.Numberformat.Format = "dd/mm/yyyy";
                 }
                 FileInfo fileInfo = new FileInfo("C:\\Temp\\" + Guid.NewGuid() + ".xlsx");
                 MailAttachment ma = new MailAttachment();

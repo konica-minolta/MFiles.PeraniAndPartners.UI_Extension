@@ -22,7 +22,7 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
         // GET: Intranet
         [EnableCors("_myAllowSpecificOrigins")] // Required for this path.
         [HttpGet]
-        public async Task<IActionResult> Get(int currentPage, int pageSize, string dominio="null",string estensione ="null", bool ricercaEsatta = false, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null)
+        public async Task<IActionResult> Get(int currentPage, int pageSize, string dominio = "null", int order = 1,string estensione = "null", bool ricercaEsatta = false, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null, string stato = "QUALSIASI")
         {
 
             var domains = from s in _intranetPeraniContext.vw_domainnames
@@ -36,18 +36,45 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
                 else
                 {
                     domains = domains.Where(s => s.NomeDominio.Contains(dominio));
-                }  
+                }
             }
             if (estensione != "null")
             {
                 domains = domains.Where(s => s.Estensione == estensione);
             }
 
-            if (scadenzaDal!=null && scadenzaAl!=null)
+            if (scadenzaDal != null && scadenzaAl != null)
             {
-                domains = domains.Where(s => s.DataScadenza >= scadenzaDal && s.DataScadenza<=scadenzaAl);
+                domains = domains.Where(s => s.DataScadenza >= scadenzaDal && s.DataScadenza <= scadenzaAl);
             }
-            domains = domains.OrderBy(s => s.NomeDominio);
+
+            if (stato != "QUALSIASI")
+            {
+                domains = domains.Where(s => s.Stato == stato);
+            }
+            if (order == 1) { 
+                domains = domains.OrderBy(s => s.NomeDominio);
+            }
+            else if (order == 2)
+            {
+                domains = domains.OrderByDescending(s => s.NomeDominio);
+            }
+            else if (order == 3)
+            {
+                domains = domains.OrderBy(s => s.DataRegistrazione);
+            }
+            else if (order == 4)
+            {
+                domains = domains.OrderByDescending(s => s.DataRegistrazione);
+            }
+            else if (order == 5)
+            {
+                domains = domains.OrderBy(s => s.DataScadenza);
+            }
+            else if (order == 6)
+            {
+                domains = domains.OrderByDescending(s => s.DataScadenza);
+            }
 
             if (domains == null) { return NotFound(); }
 

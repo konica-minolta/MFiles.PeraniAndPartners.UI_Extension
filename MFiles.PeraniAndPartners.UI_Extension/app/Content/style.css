@@ -20,11 +20,10 @@ table {
 }
 
 .form-button-perani {
-	margin-top: 27px;
+	margin-top: 22px;
 }
 
 .perani-footer {
-	position:fixed;
 	width:100%;
 	bottom:0;
 	background:#ffffff;
@@ -72,3 +71,25 @@ padding-bottom:30px;
 .close {
 	margin-top: -5px;
 }
+
+#ClearButton {
+	margin-left:5px;
+}
+
+
+#sortDominio, #sortDataRegistrazione, #sortDataScadenza {
+	cursor: pointer;
+}
+
+#recordsOrderType {
+	color:white;
+}
+
+.navbar-expand-lg .form-group-perani {
+	margin-bottom:0px;
+	
+}
+
+	.navbar-expand-lg .form-group-perani label {
+		margin-bottom: -10px;
+	}

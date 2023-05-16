@@ -1,3 +1,5 @@
+
+
 function OnNewDashboard(dashboard) {
 
     
@@ -14,7 +16,7 @@ function OnNewDashboard(dashboard) {
     function OnStarted() {
 
         var accountName = dashboard.CustomData.AccountName;
-     
+      
         //Load Dati
         GetData(1, 0);
 
@@ -32,32 +34,96 @@ function OnNewDashboard(dashboard) {
         //EsportaExcel Pagina
         $("#EsportaPagina").on("click", function () {
             var currentPage = $("li.current").text();
-            window.location = "http://localhost:5250/api/IntranetDataPaginated?currentPage=" + currentPage + "&pageSize=" + $("#itemPerPagina").val() + "&dominio=" + (($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null") + "&estensione=" + (($("#extDominio").val() != "") ? $("#extDominio").val() : "null") + "&ricercaEsatta=" + (($("#dominioEsatto").is(':checked')) ? true : false) + (($("#scadenzaDal").val() != "") ? ("&scadenzaDal=" + $("#scadenzaDal").val()) : "") + (($("#scadenzaAl").val() != "") ? ("&scadenzaAl=" + $("#scadenzaAl").val()) : "");
+            if (currentPage == "") currentPage = 1;
+            //window.location = "http://192.168.10.242:8085/api/IntranetDataPaginated?currentPage=" + currentPage + "&pageSize=" + $("#itemPerPagina").val() + "&dominio=" + (($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null") + "&estensione=" + (($("#extDominio").val() != "") ? $("#extDominio").val() : "null") + "&ricercaEsatta=" + (($("#dominioEsatto").is(':checked')) ? true : false) + (($("#scadenzaDal").val() != "") ? ("&scadenzaDal=" + $("#scadenzaDal").val()) : "") + (($("#scadenzaAl").val() != "") ? ("&scadenzaAl=" + $("#scadenzaAl").val()) : "") + "&stato=" + (($("#status").val() != "") ? $("#status").val() : "null");
+            window.location = "http://localhost:8085/api/IntranetDataPaginated?currentPage=" + currentPage + "&pageSize=" + $("#itemPerPagina").val() + "&dominio=" + (($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null") + "&estensione=" + (($("#extDominio").val() != "") ? $("#extDominio").val() : "null") + "&ricercaEsatta=" + (($("#dominioEsatto").is(':checked')) ? true : false) + (($("#scadenzaDal").val() != "") ? ("&scadenzaDal=" + $("#scadenzaDal").val()) : "") + (($("#scadenzaAl").val() != "") ? ("&scadenzaAl=" + $("#scadenzaAl").val()) : "") + "&stato=" + (($("#status").val() != "") ? $("#status").val() : "null");
         });
 
         //EsportaExcel Tutti
         $("#EsportaTutti").on("click", function () {
-            window.location = "http://localhost:5250/api/IntranetDataAll?accountName=admin&dominio=" + (($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null") + "&estensione=" + (($("#extDominio").val() != "") ? $("#extDominio").val() : "null") + "&ricercaEsatta=" + (($("#dominioEsatto").is(':checked')) ? true : false) + (($("#scadenzaDal").val() != "") ? ("&scadenzaDal=" + $("#scadenzaDal").val()) : "") + (($("#scadenzaAl").val() != "") ? ("&scadenzaAl=" + $("#scadenzaAl").val()) : "");
+            //window.location = "http://192.168.10.242:8085/api/IntranetDataAll?accountName=admin&dominio=" + (($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null") + "&estensione=" + (($("#extDominio").val() != "") ? $("#extDominio").val() : "null") + "&ricercaEsatta=" + (($("#dominioEsatto").is(':checked')) ? true : false) + (($("#scadenzaDal").val() != "") ? ("&scadenzaDal=" + $("#scadenzaDal").val()) : "") + (($("#scadenzaAl").val() != "") ? ("&scadenzaAl=" + $("#scadenzaAl").val()) : "") + "&stato=" + (($("#status").val() != "") ? $("#status").val() : "null");
+            window.location = "http://localhost:8085/api/IntranetDataAll?accountName=admin&dominio=" + (($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null") + "&estensione=" + (($("#extDominio").val() != "") ? $("#extDominio").val() : "null") + "&ricercaEsatta=" + (($("#dominioEsatto").is(':checked')) ? true : false) + (($("#scadenzaDal").val() != "") ? ("&scadenzaDal=" + $("#scadenzaDal").val()) : "") + (($("#scadenzaAl").val() != "") ? ("&scadenzaAl=" + $("#scadenzaAl").val()) : "") + "&stato=" + (($("#status").val() != "") ? $("#status").val() : "null");
         });
 
-       
+        $("#ClearButton").on("click", function () {
+            $("#nomeDominio").val("");
+            $("#extDominio").val("");
+            $("#dominioEsatto").prop("checked", false);
+            $("#tipoRicerca").val("QUALSIASI");
+            $("#scadenzaDal").val("");
+            $("#scadenzaAl").val("");
+            $("#tipoRicerca").val("Dominio");
+        });
+
+        $(".fas").hide();
+        $(".fas").first().show();
+
+        $("#sortDominio").on("click", function () {
+            if ($("#sortDominio .fa-sort-down").is(':visible')) {
+                $(".fas").hide();
+                $("#sortDominio .fa-sort-up").show();
+                $("#recordsOrderType").text("2");
+            }
+            else {
+                $(".fas").hide();
+                $("#sortDominio .fa-sort-down").show();
+                $("#recordsOrderType").text("1");
+            }
+            GetData(1, 0);
+        });
+        $("#sortDataRegistrazione").on("click", function () {
+            if ($("#sortDataRegistrazione .fa-sort-down").is(':visible')) {
+                $(".fas").hide();
+                $("#sortDataRegistrazione .fa-sort-up").show();
+                $("#recordsOrderType").text("4");
+            }
+            else {
+                $(".fas").hide();
+                $("#sortDataRegistrazione .fa-sort-down").show();
+                $("#recordsOrderType").text("3");
+            }
+            GetData(1, 0);
+        });
+
+        $("#sortDataScadenza").on("click", function () {
+            if ($("#sortDataScadenza .fa-sort-down").is(':visible')) {
+                $(".fas").hide();
+                $("#sortDataScadenza .fa-sort-up").show();
+                $("#recordsOrderType").text("6");
+            }
+            else {
+                $(".fas").hide();
+                $("#sortDataScadenza .fa-sort-down").show();
+                $("#recordsOrderType").text("5");
+            }
+            GetData(1, 0);
+        });
     }
 }
 
 function GetRecordNumber(currentPage, startPaging) {
+    var scadenzaDal = ($("#scadenzaDal").val() != "") ? ($("#scadenzaDal").val().split('/')[1] + "/" + $("#scadenzaDal").val().split('/')[0] + "/" + $("#scadenzaDal").val().split('/')[2]) :null;
+    var scadenzaAl = ($("#scadenzaAl").val() != "") ? ($("#scadenzaAl").val().split('/')[1] + "/" + $("#scadenzaAl").val().split('/')[0] + "/" + $("#scadenzaAl").val().split('/')[2]) :null;
+   
     $.ajax({
-        url: "http://localhost:5250/api/IntranetCounter",
+        url: "http://localhost:8085/api/IntranetCounter",
+        //url: "http://192.168.10.242:8085/api/IntranetCounter",
         data: {
             pageSize: $("#itemPerPagina").val(),
             dominio: ($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null",
             estensione: ($("#extDominio").val() != "") ? $("#extDominio").val() : "null",
             ricercaEsatta: ($("#dominioEsatto").is(':checked')) ? true : false,
-            scadenzaDal: ($("#scadenzaDal").val() != "") ? $("#scadenzaDal").val() : null,
-            scadenzaAl: ($("#scadenzaAl").val() != "") ? $("#scadenzaAl").val() : null
+            scadenzaDal: scadenzaDal,
+            scadenzaAl: scadenzaAl,
+            stato: ($("#status").val() != "") ? $("#status").val() : "null"
         },
         success: function (result) {
+           
+            totalRecords = parseInt(result);
             
-            CreatePagination(result, currentPage, startPaging);
+           
+            CreatePagination(parseInt(result / parseInt($("#itemPerPagina").val())), currentPage, startPaging);
+            $("#recordsCounter").text(totalRecords);
         }
     });
 }
@@ -91,7 +157,6 @@ function CreatePagination(pageCount,currentPage,startPage) {
         startPage = parseInt($("#pagination-perani li").eq(1).text());
         if (startPage > 1) {
             pageCount = startPage + pageCount-1;
-            //alert(startPage + "-" + pageCount);
         }
     }
 
@@ -113,13 +178,14 @@ function CreatePagination(pageCount,currentPage,startPage) {
     
     //$("#pagination-perani li").first().find("a").addClass("current");
 
-    $("#pagination-perani li#nextPage a").on("click", function () {
-        
-        if (parseInt($("#pagination-perani li").eq($("#pagination-perani li").length - 2).text()) < count) {
+    $("#pagination-perani li#nextPage a").on("click", function (e) {
+        e.preventDefault();
+        if (parseInt($("#pagination-perani li").eq($("#pagination-perani li").length - 2).text()) <= count) {
             CreatePagination(count, parseInt($(this).text()), 1);
         }
     });
-    $("#pagination-perani li#prevPage a").on("click", function () {
+    $("#pagination-perani li#prevPage a").on("click", function (e) {
+        e.preventDefault();
         if (parseInt($("#pagination-perani li").eq(1).text())> 1) {
             CreatePagination(count, parseInt($(this).text()), -1);
         }
@@ -128,44 +194,74 @@ function CreatePagination(pageCount,currentPage,startPage) {
     $("#pagination-perani li.item a").on("click", function () {
         GetData(parseInt($(this).text()));
     });
+
+
+    $(window).on("keydown", function (e) {
+        if (e && e.keyCode == 13) {
+           
+            GetData(1, 0);
+        }
+    });
     
 }
-function GetData(currentPage,startPaging) {
 
+function checkSubmit(e) {
+    if (e && e.keyCode == 13) {
+        GetData(1, 0);
+    }
+}
+
+function GetData(currentPage,startPaging) {
+  
     GetRecordNumber(currentPage, startPaging);
-   
+    var scadenzaDal = ($("#scadenzaDal").val() != "") ? ($("#scadenzaDal").val().split('/')[1] + "/" + $("#scadenzaDal").val().split('/')[0] + "/" + $("#scadenzaDal").val().split('/')[2]) : "";
+    var scadenzaAl = ($("#scadenzaDal").val() != "") ? ($("#scadenzaDal").val().split('/')[1] + "/" + $("#scadenzaDal").val().split('/')[0] + "/" + $("#scadenzaDal").val().split('/')[2]) : "";
     $.ajax({
-        url: "http://localhost:5250/api/Intranet",
+        url: "http://localhost:8085/api/Intranet",
+        //url: "http://192.168.10.242:8085/api/Intranet",
         data: {
             currentPage: currentPage,
             pageSize: $("#itemPerPagina").val(),
             dominio: ($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null",
             estensione: ($("#extDominio").val() != "") ? $("#extDominio").val() : "null",
             ricercaEsatta: ($("#dominioEsatto").is(':checked')) ? true : false,
-            scadenzaDal: ($("#scadenzaDal").val() != "") ? $("#scadenzaDal").val() : null,
-            scadenzaAl: ($("#scadenzaAl").val() != "") ? $("#scadenzaAl").val() : null
+            scadenzaDal: ($("#scadenzaDal").val() != "") ? scadenzaDal : null,
+            scadenzaAl: ($("#scadenzaAl").val() != "") ? scadenzaAl : null,
+            stato: ($("#status").val() != "") ? $("#status").val() : "null",
+            order: $("#recordsOrderType").text()
         },
         success: function (result) {
-            // convert string to JSON
+          
+            $("#IntranetTable tr.tableRow").remove();
+           
+            $.each(result, function (i, item) {
+               
+                var dataRegistrazione = "";
+                var dataScadenza = "";
+                if (item.dataRegistrazione != null && item.dataRegistrazione!="") {
+                    var dataRegistrazioneTemp = item.dataRegistrazione.split('T')[0];
+                    var dataRegistrazione = dataRegistrazioneTemp.split('-')[2] + "/" + dataRegistrazioneTemp.split('-')[1] + "/" + dataRegistrazioneTemp.split('-')[0];
+                }
+                if (item.dataScadenza != null && item.dataScadenza != "") {
+                    dataScadenzaTemp = item.dataScadenza.split('T')[0];
+                    var dataScadenza = dataScadenzaTemp.split('-')[2] + "/" + dataScadenzaTemp.split('-')[1] + "/" + dataScadenzaTemp.split('-')[0];
+                }
 
-
-            $(function () {
-                $("#IntranetTable tr.tableRow").remove();
-                $.each(result, function (i, item) {
-                    var tr = $('<tr>').append(
-                        $('<td>').text(item.nomeDominioCompleto),
-                        $('<td>').text(item.dataRegistrazione),
-                        $('<td>').text(item.dataScadenza),
-                        $('<td>').text(item.provider),
-                        $('<td>').text(item.registrar),
-                        $('<td>').text(item.cliente),
-                        $('<td>').text(item.owner),
-                        $('<td>').text(item.noteExRegistrar),
-                        $('<td>').text(item.noteGenerali)
-                    );
-                    tr.addClass("tableRow");
-                    $('#IntranetTable tbody').append(tr);
-                });
+                var tr = $('<tr>').append(
+                    $('<td>').text(item.nomeDominioCompleto),
+                    $('<td>').text(dataRegistrazione),
+                    $('<td>').text(dataScadenza),
+                    $('<td>').text(item.provider),
+                    $('<td>').text(item.registrar),
+                    $('<td>').text(item.cliente),
+                    $('<td>').text(item.owner),
+                    $('<td>').text(item.stato),
+                    $('<td>').text(item.noteExRegistrar),
+                    $('<td>').text(item.noteGenerali)
+                );
+                tr.addClass("tableRow");
+                $('#IntranetTable tbody').append(tr);
+              
             });
         }
     });
