@@ -36,15 +36,17 @@ function OnNewNormalShellFrame(shellFrame) {
     function OnSelectionChanged(selectedItems) {
 
         // Show, if exactly one document is selected, otherwise hide.
+        /*
         if (IsExactlyOneDocumentSelected(selectedItems))
             ShowDashboard(selectedItems.ObjectVersions[0]);
         else
             HideDashboard();
+        */
     }
 
     // Returns true, if exactly one document is selected.
     function IsExactlyOneDocumentSelected(selectedItems) {
-
+        /*
         // Ensure that we have exactly one item selected and that it is an object.
         if (selectedItems.Count != 1 || selectedItems.ObjectVersions.Count != 1)
             return false;
@@ -58,6 +60,7 @@ function OnNewNormalShellFrame(shellFrame) {
 
         // Exactly one document is selected.
         return true;
+        */
     }
 
     // Shows dashboard in the tab and sets the tab visible.
