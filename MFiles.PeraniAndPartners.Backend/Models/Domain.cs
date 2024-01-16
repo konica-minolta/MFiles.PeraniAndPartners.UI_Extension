@@ -20,6 +20,8 @@ namespace MFiles.PeraniAndPartners.Backend.Models
         
         public string Estensione { get; set; }
         public string Stato { get; set; }
+        public string NumeroPratica { get; set; }
 
-    }
+
+   }
 }

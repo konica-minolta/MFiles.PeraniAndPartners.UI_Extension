@@ -28,11 +28,16 @@
                 <div class="form-group form-group-perani">
                     <label for="tipoRicerca">Tipo Ricerca</label>
                     <select class="form-control" id="tipoRicerca">
-                        <option>Dominio</option>
+                       <option>Dominio</option>
+                       <option>Registrar</option>
+                       <option>Provider</option>
+                       <option>Owner</option>
+                       <option>Cliente</option>
+                       <option>Riferimento</option>
                     </select>
                 </div>
                 <div class="form-group form-group-perani">
-                    <label for="nomeDominio">Nome Dominio</label>
+                    <label for="nomeDominio">Testo da cercare</label>
                     <input type="text" class="form-control" id="nomeDominio">
                 </div>
                 <div class="form-group form-group-perani">
@@ -94,18 +99,19 @@
         <div class="row">
             <table id="IntranetTable" class="table table-sm table-responsive">
                 <thead>
-                    <tr>
-                        <th id="sortDominio"class="header" scope="col">Nome Dominio <i class="fas fa-sort-down"></i> <i class="fas fa-sort-up"></i></th>
-                        <th id="sortDataRegistrazione" class="header" scope="col">Registrazione <i class="fas fa-sort-down"></i><i class="fas fa-sort-up"></i></th>
-                        <th id="sortDataScadenza"class="header" scope="col">Scadenza <i class="fas fa-sort-down"></i><i class="fas fa-sort-up"></i></th>
-                        <th class="header" scope="col">Provider</th>
-                        <th class="header" scope="col">Registrar</th>
-                        <th class="header" scope="col">Cliente</th>
-                        <th class="header" scope="col">Owner</th>
-                        <th class="header" scope="col">Stato</th>
-                        <th class="header" scope="col">Note Ex Registrar</th>
-                        <th class="header" scope="col">Note Generali</th>
-</thead>
+                   <tr>
+                      <th id="sortDominio" class="header" scope="col">Nome Dominio <i class="fas fa-sort-down"></i> <i class="fas fa-sort-up"></i></th>
+                      <th id="sortDataRegistrazione" class="header" scope="col">Registrazione <i class="fas fa-sort-down"></i><i class="fas fa-sort-up"></i></th>
+                      <th id="sortDataScadenza" class="header" scope="col">Scadenza <i class="fas fa-sort-down"></i><i class="fas fa-sort-up"></i></th>
+                      <th class="header" scope="col">Provider</th>
+                      <th class="header" scope="col">Registrar</th>
+                      <th class="header" scope="col">Cliente</th>
+                      <th class="header" scope="col">Owner</th>
+                      <th class="header" scope="col">Rif. Pratica</th>
+                      <th class="header" scope="col">Stato</th>
+                      <th class="header" scope="col">Note Ex Registrar</th>
+                      <th class="header" scope="col">Note Generali</th>
+                </thead>
                 <tbody>
                 </tbody>
 

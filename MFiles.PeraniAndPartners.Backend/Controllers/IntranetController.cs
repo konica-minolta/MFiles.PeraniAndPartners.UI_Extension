@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml.FormulaParsing.Utilities;
 using System.Transactions;
 
 namespace MFiles.PeraniAndPartners.Backend.Controllers
@@ -19,31 +20,92 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
             _intranetPeraniContext = intranetPeraniContext;
         }
 
-        // GET: Intranet
-        [EnableCors("_myAllowSpecificOrigins")] // Required for this path.
-        [HttpGet]
-        public async Task<IActionResult> Get(int currentPage, int pageSize, string dominio = "null", int order = 1,string estensione = "null", bool ricercaEsatta = false, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null, string stato = "QUALSIASI")
-        {
+      // GET: Intranet
+      [EnableCors("_myAllowSpecificOrigins")] // Required for this path.
+      [HttpGet]
+      public IActionResult Get(int currentPage, int pageSize, string dominio = "null", int order = 1, string estensione = "null", bool ricercaEsatta = false, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null, string stato = "QUALSIASI", string tipoRicerca = "Dominio")
+      //public async Task<IActionResult> Get(int currentPage, int pageSize, string dominio = "null",int order=1,string estensione="null",  bool ricercaEsatta = false, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null, string stato = "QUALSIASI",string tipoRicerca="Dominio")
+      {
 
-            using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions
-            {
-                IsolationLevel = System.Transactions.IsolationLevel.ReadUncommitted
-            }, TransactionScopeAsyncFlowOption.Enabled))
-            {
-                var domains = from s in _intranetPeraniContext.vw_domainnames
+         //using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions
+         //{
+         //   IsolationLevel = System.Transactions.IsolationLevel.ReadUncommitted
+         //}, TransactionScopeAsyncFlowOption.Enabled))
+         //{
+         var domains = from s in _intranetPeraniContext.vw_domainnames
                               select s;
-                if (dominio != "null")
-                {
-                    if (ricercaEsatta)
-                    {
-                        domains = domains.Where(s => s.NomeDominio == dominio);
-                    }
-                    else
-                    {
-                        domains = domains.Where(s => s.NomeDominio.Contains(dominio));
-                    }
-                }
-                if (estensione != "null")
+
+            if (tipoRicerca == "Dominio")
+            {
+               if (dominio != "null")
+               {
+                  if (ricercaEsatta)
+                  {
+                     domains = domains.Where(s => s.NomeDominio == dominio);
+                  }
+                  else
+                  {
+                     domains = domains.Where(s => s.NomeDominio.Contains(dominio));
+                  }
+               }
+            }
+            else if (tipoRicerca == "Provider")
+            {
+               if (dominio != "null")
+               {
+                  if (ricercaEsatta)
+                  {
+                     domains = domains.Where(s => s.Provider == dominio);
+                  }
+                  else
+                  {
+                     domains = domains.Where(s => s.Provider.Contains(dominio));
+                  }
+               }
+            }
+            else if (tipoRicerca == "Registrar")
+            {
+               if (dominio != "null")
+               {
+                  if (ricercaEsatta)
+                  {
+                     domains = domains.Where(s => s.Registrar == dominio);
+                  }
+                  else
+                  {
+                     domains = domains.Where(s => s.Registrar.Contains(dominio));
+                  }
+               }
+            }
+            else if (tipoRicerca == "Owner")
+            {
+               if (dominio != "null")
+               {
+                  if (ricercaEsatta)
+                  {
+                     domains = domains.Where(s => s.Owner == dominio);
+                  }
+                  else
+                  {
+                     domains = domains.Where(s => s.Owner.Contains(dominio));
+                  }
+               }
+            }
+            else if (tipoRicerca == "Cliente")
+            {
+               if (dominio != "null")
+               {
+                  if (ricercaEsatta)
+                  {
+                     domains = domains.Where(s => s.Cliente == dominio);
+                  }
+                  else
+                  {
+                     domains = domains.Where(s => s.Cliente.Contains(dominio));
+                  }
+               }
+            }
+            if (estensione != "null")
                 {
                     domains = domains.Where(s => s.Estensione == estensione);
                 }
@@ -57,36 +119,36 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
                 {
                     domains = domains.Where(s => s.Stato == stato);
                 }
-                if (order == 1)
-                {
-                    domains = domains.OrderBy(s => s.NomeDominio);
-                }
-                else if (order == 2)
-                {
-                    domains = domains.OrderByDescending(s => s.NomeDominio);
-                }
-                else if (order == 3)
-                {
-                    domains = domains.OrderBy(s => s.DataRegistrazione);
-                }
-                else if (order == 4)
-                {
-                    domains = domains.OrderByDescending(s => s.DataRegistrazione);
-                }
-                else if (order == 5)
-                {
-                    domains = domains.OrderBy(s => s.DataScadenza);
-                }
-                else if (order == 6)
-                {
-                    domains = domains.OrderByDescending(s => s.DataScadenza);
-                }
+         //if (order == 1)
+         //{
+         //   domains = domains.OrderBy(s => s.NomeDominio);
+         //}
+         //else if (order == 2)
+         //{
+         //   domains = domains.OrderByDescending(s => s.NomeDominio);
+         //}
+         //else if (order == 3)
+         //{
+         //   domains = domains.OrderBy(s => s.DataRegistrazione);
+         //}
+         //else if (order == 4)
+         //{
+         //   domains = domains.OrderByDescending(s => s.DataRegistrazione);
+         //}
+         //else if (order == 5)
+         //{
+         //   domains = domains.OrderBy(s => s.DataScadenza);
+         //}
+         //else if (order == 6)
+         //{
+         //   domains = domains.OrderByDescending(s => s.DataScadenza);
+         //}
 
-                if (domains == null) { return NotFound(); }
+         if (domains == null) { return NotFound(); }
 
                 Result result = new Result(domains.Count(), PaginatedList<Domain>.CreateAsync(domains, currentPage, pageSize));
                 return Ok(result);
-            }         
+       //   }         
         }
 
         public class Result

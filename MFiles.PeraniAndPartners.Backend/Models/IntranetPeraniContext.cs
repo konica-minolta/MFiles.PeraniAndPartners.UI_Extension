@@ -26,7 +26,7 @@ namespace MFiles.PeraniAndPartners.Backend.Models
             {
                 entity.HasNoKey();
 
-                entity.ToView("Domain");
+                entity.ToView("vw_domainnames");
 
                 entity.Property(e => e.Cliente).HasMaxLength(100);
 
@@ -50,7 +50,9 @@ namespace MFiles.PeraniAndPartners.Backend.Models
 
                 entity.Property(e => e.Registrar).HasMaxLength(100);
 
-                entity.Property(e => e.Stato).HasMaxLength(100);
+               entity.Property(e => e.Stato).HasMaxLength(100);
+
+               entity.Property(e => e.NumeroPratica).HasMaxLength(100);
             });
 
             OnModelCreatingPartial(modelBuilder);

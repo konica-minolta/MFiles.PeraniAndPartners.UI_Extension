@@ -204,12 +204,14 @@ function GetData(currentPage,startPaging) {
             currentPage: currentPage,
             pageSize: $("#itemPerPagina").val(),
             dominio: ($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null",
+            cliente: ($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null",
             estensione: ($("#extDominio").val() != "") ? $("#extDominio").val() : "null",
             ricercaEsatta: ($("#dominioEsatto").is(':checked')) ? true : false,
             scadenzaDal: ($("#scadenzaDal").val() != "") ? scadenzaDal : null,
             scadenzaAl: ($("#scadenzaAl").val() != "") ? scadenzaAl : null,
             stato: ($("#status").val() != "") ? $("#status").val() : "null",
-            order: $("#recordsOrderType").text()
+            order: $("#recordsOrderType").text(),
+            tipoRicerca: $("#tipoRicerca").val() 
         },
         success: function (result) {
 
@@ -241,6 +243,7 @@ function GetData(currentPage,startPaging) {
                     $('<td>').text(item.registrar),
                     $('<td>').text(item.cliente),
                     $('<td>').text(item.owner),
+                    $('<td>').text(item.numeroPratica),
                     $('<td>').text(item.stato),
                     $('<td>').text(item.noteExRegistrar),
                     $('<td>').text(item.noteGenerali)
