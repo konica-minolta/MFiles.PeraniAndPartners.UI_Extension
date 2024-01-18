@@ -44,15 +44,20 @@ $(document).ready(function () {
         window.location = "http://localhost:8085/api/IntranetDataAll?accountName=admin&dominio=" + (($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null") + "&estensione=" + (($("#extDominio").val() != "") ? $("#extDominio").val() : "null") + "&ricercaEsatta=" + (($("#dominioEsatto").is(':checked')) ? true : false) + (($("#scadenzaDal").val() != "") ? ("&scadenzaDal=" + $("#scadenzaDal").val()) : "") + (($("#scadenzaAl").val() != "") ? ("&scadenzaAl=" + $("#scadenzaAl").val()) : "") + "&stato=" + (($("#status").val() != "") ? $("#status").val() : "null");
     });
 
-    $("#ClearButton").on("click", function () {
-        $("#nomeDominio").val("");
-        $("#extDominio").val("");
-        $("#dominioEsatto").prop("checked", false);
-        $("#tipoRicerca").val("QUALSIASI");
-        $("#scadenzaDal").val("");
-        $("#scadenzaAl").val("");
-        $("#tipoRicerca").val("Dominio");
-    });
+        $("#ClearButton").on("click", function () {
+            $("#nomeDominio").val("");
+            $("#extDominio option").prop("selected", false)
+            $("#extDominio option[value=EMPTY_VALUE]").prop('selected', true); 
+            $("#extDominio").trigger("change");
+            $("#dominioEsatto").prop("checked", false);
+            $("#tipoRicerca").val("QUALSIASI");
+            $("#scadenzaDal").val("");
+            $("#scadenzaAl").val("");
+            $("#tipoRicerca").val("Dominio");
+            $("#status option").prop('selected', false); 
+            $("#status option[value=QUALSIASI]").prop('selected', true); 
+            $("#status").trigger("change");
+        });
 
     $(".fas").hide();
     $(".fas").first().show();

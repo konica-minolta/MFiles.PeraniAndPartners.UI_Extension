@@ -53,12 +53,17 @@ function OnNewDashboard(dashboard) {
 
         $("#ClearButton").on("click", function () {
             $("#nomeDominio").val("");
-            $("#extDominio").val("");
+            $("#extDominio option").prop("selected", false)
+            $("#extDominio option[value=EMPTY_VALUE]").prop('selected', true); 
+            $("#extDominio").trigger("change");
             $("#dominioEsatto").prop("checked", false);
             $("#tipoRicerca").val("QUALSIASI");
             $("#scadenzaDal").val("");
             $("#scadenzaAl").val("");
             $("#tipoRicerca").val("Dominio");
+            $("#status option").prop('selected', false); 
+            $("#status option[value=QUALSIASI]").prop('selected', true); 
+            $("#status").trigger("change");
         });
 
         $(".fas").hide();
@@ -195,21 +200,47 @@ function CreatePagination(pageCount,currentPage,startPage) {
 function GetData(currentPage,startPaging) {
   
     //GetRecordNumber(currentPage, startPaging);
+    var hostUrlAPIRest = "http://localhost:5250"
+    $("#LoadingDataSectionId").show();
+    $.ajax({
+        url: hostUrlAPIRest+"/api/Search",
+        type: 'GET', 
+        dataType: 'json',
+        data: {
+            label: "domini"
+        },
+        success: function (result) {
+            var listDomini = result.domini;
+            var first = true;
+            var selected = "selected";
+            var value = "EMPTY_VALUE";
+            $('#extDominio').find('option').remove()
+            $.each(listDomini, function(index, domainValue) {
+                if (first) {
+                    first = false;
+                } else {
+                    selected = "";   
+                    value = domainValue;                    
+                }
+                $("#extDominio").append('<option '+selected+' value=' + value + '>' + domainValue + '</option>');
+        });            
+        }
+    });
+    
     var scadenzaDal = ($("#scadenzaDal").val() != "") ? ($("#scadenzaDal").val().split('/')[1] + "/" + $("#scadenzaDal").val().split('/')[0] + "/" + $("#scadenzaDal").val().split('/')[2]) : "";
     var scadenzaAl = ($("#scadenzaAl").val() != "") ? ($("#scadenzaAl").val().split('/')[1] + "/" + $("#scadenzaAl").val().split('/')[0] + "/" + $("#scadenzaAl").val().split('/')[2]) : "";
     $.ajax({
-        url: "http://localhost:8085/api/Intranet",
+        url: hostUrlAPIRest+"/api/Intranet",
         //url: "http://192.168.10.242:8085/api/Intranet",
         data: {
             currentPage: currentPage,
             pageSize: $("#itemPerPagina").val(),
-            dominio: ($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null",
-            cliente: ($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null",
-            estensione: ($("#extDominio").val() != "") ? $("#extDominio").val() : "null",
+            searchParam: ($("#nomeDominio").val() != "") ? $("#nomeDominio").val() : "null",
+            estensione: ($("#extDominio").val().length>0 && ($("#extDominio").val()+"").indexOf("EMPTY_VALUE")==-1) ? $("#extDominio").val()+"" : "null",
             ricercaEsatta: ($("#dominioEsatto").is(':checked')) ? true : false,
             scadenzaDal: ($("#scadenzaDal").val() != "") ? scadenzaDal : null,
             scadenzaAl: ($("#scadenzaAl").val() != "") ? scadenzaAl : null,
-            stato: ($("#status").val() != "") ? $("#status").val() : "null",
+            stato: ($("#status").val().length>0) ? $("#status").val()+"" : "null",
             order: $("#recordsOrderType").text(),
             tipoRicerca: $("#tipoRicerca").val() 
         },
@@ -252,6 +283,7 @@ function GetData(currentPage,startPaging) {
                 $('#IntranetTable tbody').append(tr);
               
             });
+            $("#LoadingDataSectionId").hide();
         }
     });
 }

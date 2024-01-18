@@ -90,6 +90,16 @@ padding-bottom:30px;
 	
 }
 
-	.navbar-expand-lg .form-group-perani label {
-		margin-bottom: -10px;
-	}
+.navbar-expand-lg .form-group-perani label {
+	margin-bottom: -10px;
+}
+
+.blink_loading {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
