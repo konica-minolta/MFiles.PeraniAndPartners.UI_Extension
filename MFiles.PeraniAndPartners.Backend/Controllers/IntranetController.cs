@@ -29,7 +29,17 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(int currentPage, int pageSize, string searchParam = "null", int order = 1, string estensione = "null", bool ricercaEsatta = false, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null, string stato = "QUALSIASI", string tipoRicerca = "Dominio")
         {
+            IQueryable<Domain> domains = GetDomains(searchParam, order, estensione, ricercaEsatta, scadenzaDal, scadenzaAl, stato, tipoRicerca);
 
+            if (domains == null) { return NotFound(); }
+            PaginatedList<Domain> resultPaginated = PaginatedList<Domain>.CreateAsync(domains, currentPage, pageSize);
+            Result result = new Result(domains.Count(), resultPaginated);
+            return Ok(result);
+            //   }         
+        }
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public IQueryable<Domain> GetDomains(string searchParam, int order, string estensione, bool ricercaEsatta, DateTime? scadenzaDal, DateTime? scadenzaAl, string stato, string tipoRicerca)
+        {
             var domains = from s in _intranetPeraniContext.vw_domainnames
                           select s;
 
@@ -85,11 +95,7 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
                 domains = domains.OrderByDescending(s => s.DataScadenza);
             }
 
-            if (domains == null) { return NotFound(); }
-
-            Result result = new Result(domains.Count(), PaginatedList<Domain>.CreateAsync(domains, currentPage, pageSize));
-            return Ok(result);
-            //   }         
+            return domains;
         }
 
         private static Expression<Func<Domain, bool>> BuilderPredicateOrCondtion(string multipleCondtionValue, string property)

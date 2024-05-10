@@ -32,40 +32,24 @@ namespace MFiles.PeraniAndPartners.Backend.Controllers
             username = configuration.GetValue<string>("MFilesUser");
             password = configuration.GetValue<string>("Password");
             _mailSettings = mailSettingsOptions.Value;
-        }
+        }   
 
         // GET: Intranet
-        // GET: Intranet
+
         [EnableCors("_myAllowSpecificOrigins")] // Required for this path.
         [HttpGet]
-        public async Task<FileResult> Get(string dominio = "null", string estensione = "null", bool ricercaEsatta = false, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null)
+        public async Task<FileResult> Get(int currentPage, int pageSize, string searchParam = "null", string estensione = "null", bool ricercaEsatta = false, DateTime? scadenzaDal = null, DateTime? scadenzaAl = null, string stato = "QUALSIASI", string tipoRicerca = "Dominio")
         {
-            var domains = from s in _intranetPeraniContext.vw_domainnames
-                          select s;
-            if (dominio != "null")
+            IntranetController IntranetController = new(_intranetPeraniContext);
+            IQueryable<Domain> result = IntranetController.GetDomains(searchParam, 1, estensione, ricercaEsatta, scadenzaDal, scadenzaAl, stato, tipoRicerca);
+            List<Domain> domainsToExport = result.ToList();
+
+            if (currentPage != -1 && pageSize != -1)
             {
-                if (ricercaEsatta)
-                {
-                    domains = domains.Where(s => s.NomeDominio == dominio);
-                }
-                else
-                {
-                    domains = domains.Where(s => s.NomeDominio.Contains(dominio));
-                }
-            }
-            if (estensione != "null")
-            {
-                domains = domains.Where(s => s.Estensione == estensione);
+                PaginatedList<Domain> resultPaginated = PaginatedList<Domain>.CreateAsync(result, currentPage, pageSize);
+                domainsToExport = resultPaginated.ToList();
             }
 
-            if (scadenzaDal != null && scadenzaAl != null)
-            {
-                domains = domains.Where(s => s.DataScadenza >= scadenzaDal && s.DataScadenza <= scadenzaAl);
-            }
-            domains = domains.OrderBy(s => s.NomeDominio);
-
-            //List<Domain> domainsToExport = domains.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList<Domain>();
-            List<Domain> domainsToExport = domains.ToList<Domain>();
             var bytes = ExcelService.ListToExcel<Domain>(domainsToExport);
 
             const string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
